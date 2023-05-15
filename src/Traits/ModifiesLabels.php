@@ -1,9 +1,9 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
-use Dacastro4\LaravelGmail\Services\Message\Mail;
-use Google_Service_Gmail_ModifyMessageRequest;
+use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Google\Service\Gmail\ModifyMessageRequest;
 
 trait ModifiesLabels
 {
@@ -12,7 +12,7 @@ trait ModifiesLabels
 
 	public function __construct()
 	{
-		$this->messageRequest = new Google_Service_Gmail_ModifyMessageRequest();
+		$this->messageRequest = new ModifyMessageRequest();
 	}
 
 	/**

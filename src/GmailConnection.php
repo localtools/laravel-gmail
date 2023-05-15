@@ -1,17 +1,16 @@
 <?php
 
-namespace Dacastro4\LaravelGmail;
+namespace Cerbaro\LaravelGmail;
 
-use Dacastro4\LaravelGmail\Traits\Configurable;
-use Dacastro4\LaravelGmail\Traits\HasLabels;
-use Google_Client;
-use Google_Service_Gmail;
-use Google_Service_Gmail_WatchRequest;
+use Cerbaro\LaravelGmail\Traits\Configurable;
+use Cerbaro\LaravelGmail\Traits\HasLabels;
+use Google\Client;
+use Google\Service\Gmail;
 use Illuminate\Container\Container;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Storage;
 
-class GmailConnection extends Google_Client
+class GmailConnection extends Client
 {
 	use HasLabels;
 	use Configurable {
@@ -44,7 +43,6 @@ class GmailConnection extends Google_Client
 		if ($this->checkPreviouslyLoggedIn()) {
 			$this->refreshTokenIfNeeded();
 		}
-
 	}
 
 	/**
@@ -66,7 +64,6 @@ class GmailConnection extends Google_Client
 			}
 
 			return !empty($savedConfigToken['access_token']);
-
 		}
 
 		return false;
@@ -176,7 +173,6 @@ class GmailConnection extends Google_Client
 		} else {
 			$disk->put($file, json_encode($config));
 		}
-
 	}
 
 	/**
@@ -221,11 +217,11 @@ class GmailConnection extends Google_Client
 	/**
 	 * Gets user profile from Gmail
 	 *
-	 * @return \Google_Service_Gmail_Profile
+	 * @return \Google\Service\Gmail\Profile
 	 */
 	public function getProfile()
 	{
-		$service = new Google_Service_Gmail($this);
+		$service = new Gmail($this);
 
 		return $service->users->getProfile('me');
 	}
@@ -258,14 +254,13 @@ class GmailConnection extends Google_Client
 		} else {
 			$disk->put($file, json_encode([]));
 		}
-
 	}
 
 	private function haveReadScope()
 	{
 		$scopes = $this->getUserScopes();
 
-		return in_array(Google_Service_Gmail::GMAIL_READONLY, $scopes);
+		return in_array(Gmail::GMAIL_READONLY, $scopes);
 	}
 
 	/**
@@ -273,11 +268,11 @@ class GmailConnection extends Google_Client
 	 *
 	 * @param string $userEmail Email address
 	 * @param array $optParams
-	 * @return \Google_Service_Gmail_Stop
+	 * @return mixed
 	 */
 	public function stopWatch($userEmail, $optParams = [])
 	{
-		$service = new Google_Service_Gmail($this);
+		$service = new Gmail($this);
 
 		return $service->users->stop($userEmail, $optParams);
 	}
@@ -286,13 +281,13 @@ class GmailConnection extends Google_Client
 	 * Set up or update a push notification watch on the given user mailbox.
 	 *
 	 * @param string $userEmail Email address
-	 * @param Google_Service_Gmail_WatchRequest $postData
+	 * @param \Google\Service\Gmail\WatchRequest $postData
 	 *
-	 * @return \Google_Service_Gmail_WatchResponse
+	 * @return \Google\Service\Gmail\WatchResponse
 	 */
-	public function setWatch($userEmail, \Google_Service_Gmail_WatchRequest $postData): \Google_Service_Gmail_WatchResponse
+	public function setWatch($userEmail, \Google\Service\Gmail\WatchRequest $postData): \Google\Service\Gmail\WatchResponse
 	{
-		$service = new Google_Service_Gmail($this);
+		$service = new Gmail($this);
 
 		return $service->users->watch($userEmail, $postData);
 	}
@@ -305,7 +300,7 @@ class GmailConnection extends Google_Client
 	 */
 	public function historyList($userEmail, $params)
 	{
-		$service = new Google_Service_Gmail($this);
+		$service = new Gmail($this);
 
 		return $service->users_history->listUsersHistory($userEmail, $params);
 	}

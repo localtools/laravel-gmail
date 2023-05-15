@@ -1,8 +1,7 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
-use Google_Service_Gmail_MessagePart;
 use Illuminate\Support\Collection;
 
 trait HasParts
@@ -54,7 +53,7 @@ trait HasParts
 		}
 
 		if ($parts) {
-			/** @var Google_Service_Gmail_MessagePart $part */
+			/** @var Google\Service\Gmail\MessagePart $part */
 			foreach ($parts as $part) {
 				if ($part) {
 					if ($returnOnFirstFound) {

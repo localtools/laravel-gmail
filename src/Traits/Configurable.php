@@ -1,14 +1,14 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
-use Google_Service_Gmail;
+use Google\Service\Gmail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Arr;
 
 /**
  * Trait Configurable
- * @package Dacastro4\LaravelGmail\Traits
+ * @package Cerbaro\LaravelGmail\Traits
  */
 trait Configurable
 {
@@ -42,7 +42,6 @@ trait Configurable
 			} else {
 				return $config;
 			}
-
 		}
 
 		return null;
@@ -123,16 +122,16 @@ trait Configurable
 	private function scopeMap($scope)
 	{
 		$scopes = [
-			'all' => Google_Service_Gmail::MAIL_GOOGLE_COM,
-			'compose' => Google_Service_Gmail::GMAIL_COMPOSE,
-			'insert' => Google_Service_Gmail::GMAIL_INSERT,
-			'labels' => Google_Service_Gmail::GMAIL_LABELS,
-			'metadata' => Google_Service_Gmail::GMAIL_METADATA,
-			'modify' => Google_Service_Gmail::GMAIL_MODIFY,
-			'readonly' => Google_Service_Gmail::GMAIL_READONLY,
-			'send' => Google_Service_Gmail::GMAIL_SEND,
-			'settings_basic' => Google_Service_Gmail::GMAIL_SETTINGS_BASIC,
-			'settings_sharing' => Google_Service_Gmail::GMAIL_SETTINGS_SHARING,
+			'all' => Gmail::MAIL_GOOGLE_COM,
+			'compose' => Gmail::GMAIL_COMPOSE,
+			'insert' => Gmail::GMAIL_INSERT,
+			'labels' => Gmail::GMAIL_LABELS,
+			'metadata' => Gmail::GMAIL_METADATA,
+			'modify' => Gmail::GMAIL_MODIFY,
+			'readonly' => Gmail::GMAIL_READONLY,
+			'send' => Gmail::GMAIL_SEND,
+			'settings_basic' => Gmail::GMAIL_SETTINGS_BASIC,
+			'settings_sharing' => Gmail::GMAIL_SETTINGS_SHARING,
 		];
 
 		return Arr::get($scopes, $scope);
@@ -141,5 +140,4 @@ trait Configurable
 	public abstract function setAccessType($type);
 
 	public abstract function setApprovalPrompt($approval);
-
 }

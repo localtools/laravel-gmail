@@ -1,6 +1,6 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
 trait HasDecodableBody
 {
@@ -16,5 +16,4 @@ trait HasDecodableBody
 
 		return base64_decode($content);
 	}
-
 }

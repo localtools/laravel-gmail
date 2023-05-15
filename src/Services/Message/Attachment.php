@@ -1,10 +1,11 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Services\Message;
+namespace Cerbaro\LaravelGmail\Services\Message;
 
-use Dacastro4\LaravelGmail\GmailConnection;
-use Dacastro4\LaravelGmail\Traits\HasDecodableBody;
-use Google_Service_Gmail;
+use Cerbaro\LaravelGmail\GmailConnection;
+use Cerbaro\LaravelGmail\Traits\HasDecodableBody;
+use Google\Service\Gmail;
+use Google\Service\Gmail\MessagePart;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -41,7 +42,7 @@ class Attachment extends GmailConnection
 	 */
 	private $headers;
 	/**
-	 * @var Google_Service_Gmail
+	 * @var Gmail
 	 */
 	private $service;
 
@@ -54,15 +55,15 @@ class Attachment extends GmailConnection
 	 * Attachment constructor.
 	 *
 	 * @param $singleMessageId
-	 * @param  \Google_Service_Gmail_MessagePart  $part
-	 * @param  \Google_Service_Gmail_MessagePart  $part
+	 * @param  MessagePart  $part
+	 * @param  MessagePart  $part
 	 * @param  int 	$userId
 	 */
-	public function __construct($singleMessageId, \Google_Service_Gmail_MessagePart $part, $userId = null)
+	public function __construct($singleMessageId, MessagePart $part, $userId = null)
 	{
 		parent::__construct(config(), $userId);
 
-		$this->service = new Google_Service_Gmail($this);
+		$this->service = new Gmail($this);
 
 		$body = $part->getBody();
 		$this->id = $body->getAttachmentId();
@@ -147,7 +148,6 @@ class Attachment extends GmailConnection
 		Storage::disk($disk)->put($filePathAndName, $data);
 
 		return $filePathAndName;
-
 	}
 
 	/**

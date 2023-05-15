@@ -1,6 +1,6 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
 trait HasHeaders
 {
@@ -38,5 +38,4 @@ trait HasHeaders
 	}
 
 	public abstract function getHeaders();
-
 }

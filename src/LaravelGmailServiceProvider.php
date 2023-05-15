@@ -1,6 +1,6 @@
 <?php
 
-namespace Dacastro4\LaravelGmail;
+namespace Cerbaro\LaravelGmail;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +22,5 @@ class LaravelGmailServiceProvider extends ServiceProvider
 		$this->app->bind('laravelgmail', function ($app) {
 			return new LaravelGmailClass($app['config']);
 		});
-
 	}
 }

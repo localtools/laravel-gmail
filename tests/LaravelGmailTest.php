@@ -1,6 +1,6 @@
 <?php
 
-use Dacastro4\LaravelGmail\Services\Message\Mail;
+use Cerbaro\LaravelGmail\Services\Message\Mail;
 use Illuminate\Container\Container;
 use Illuminate\Mail\Markdown;
 use Tests\TestCase;
@@ -18,13 +18,13 @@ class LaravelGmailTest extends TestCase
         $mocked_markdown->shouldReceive('theme')->once()->with(config('mail.markdown.theme'));
         $mocked_markdown->shouldReceive('render')->once()->with(
             'sample-markdown',
-            [ 'url' => 'https://www.google.com' ]
+            ['url' => 'https://www.google.com']
         );
-        
+
         // trigger
         (new Mail())->markdown(
-            'sample-markdown', 
-            [ 'url' => 'https://www.google.com' ]
+            'sample-markdown',
+            ['url' => 'https://www.google.com']
         );
     }
 }

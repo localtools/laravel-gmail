@@ -1,6 +1,6 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
 use Illuminate\Support\Arr;
 
@@ -27,7 +27,6 @@ trait SendsParameters
 		} else {
 			$this->params = Arr::add($this->params, $column, $query);
 		}
-
 	}
 
 	public function addPageToken($token)

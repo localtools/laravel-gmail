@@ -1,9 +1,9 @@
 <?php
 
-namespace Dacastro4\LaravelGmail;
+namespace Cerbaro\LaravelGmail;
 
-use Dacastro4\LaravelGmail\Exceptions\AuthException;
-use Dacastro4\LaravelGmail\Services\Message;
+use Cerbaro\LaravelGmail\Exceptions\AuthException;
+use Cerbaro\LaravelGmail\Services\Message;
 use Illuminate\Support\Facades\Redirect;
 
 class LaravelGmailClass extends GmailConnection
@@ -33,7 +33,7 @@ class LaravelGmailClass extends GmailConnection
 	/**
 	 * Returns the Gmail user email
 	 *
-	 * @return \Google_Service_Gmail_Profile
+	 * @return \Google\Service\Gmail\Profile
 	 */
 	public function user()
 	{
@@ -43,7 +43,7 @@ class LaravelGmailClass extends GmailConnection
 	/**
 	 * Updates / sets the current userId for the service
 	 *
-	 * @return \Google_Service_Gmail_Profile
+	 * @return \Google\Service\Gmail\Profile
 	 */
 	public function setUserId($userId)
 	{
@@ -71,5 +71,4 @@ class LaravelGmailClass extends GmailConnection
 		$this->revokeToken();
 		$this->deleteAccessToken();
 	}
-
 }

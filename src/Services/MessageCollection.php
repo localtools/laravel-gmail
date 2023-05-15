@@ -1,6 +1,6 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Services;
+namespace Cerbaro\LaravelGmail\Services;
 
 use Illuminate\Support\Collection;
 

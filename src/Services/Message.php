@@ -1,12 +1,13 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Services;
+namespace Cerbaro\LaravelGmail\Services;
 
-use Dacastro4\LaravelGmail\LaravelGmailClass;
-use Dacastro4\LaravelGmail\Services\Message\Mail;
-use Dacastro4\LaravelGmail\Traits\Filterable;
-use Dacastro4\LaravelGmail\Traits\SendsParameters;
-use Google_Service_Gmail;
+use Cerbaro\LaravelGmail\LaravelGmailClass;
+use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Cerbaro\LaravelGmail\Traits\Filterable;
+use Cerbaro\LaravelGmail\Traits\SendsParameters;
+use Google\Service\Gmail;
+use Psr\Http\Message\RequestInterface;
 
 class Message
 {
@@ -37,14 +38,14 @@ class Message
 	public function __construct(LaravelGmailClass $client)
 	{
 		$this->client = $client;
-		$this->service = new Google_Service_Gmail($client);
+		$this->service = new Gmail($client);
 	}
 
 	/**
 	 * Returns next page if available of messages or an empty collection
 	 *
 	 * @return \Illuminate\Support\Collection
-	 * @throws \Google_Exception
+	 * @throws \Google\Exception
 	 */
 	public function next()
 	{
@@ -61,7 +62,7 @@ class Message
 	 * @param string|null $pageToken
 	 *
 	 * @return \Illuminate\Support\Collection
-	 * @throws \Google_Exception
+	 * @throws \Google\Exception
 	 */
 	public function all(string $pageToken = null)
 	{
@@ -174,7 +175,7 @@ class Message
 	/**
 	 * @param $id
 	 *
-	 * @return \Google_Service_Gmail_Message
+	 * @return \Google\Service\Gmail\Message|RequestInterface
 	 */
 	private function getRequest($id)
 	{
@@ -182,20 +183,12 @@ class Message
 	}
 
 	/**
-	 * @return \Google_Service_Gmail_ListMessagesResponse|object
-	 * @throws \Google_Exception
+	 * @return \Google\Service\Gmail\ListMessagesResponse|object
+	 * @throws \Google\Exception
 	 */
 	private function getMessagesResponse()
 	{
 		$responseOrRequest = $this->service->users_messages->listUsersMessages('me', $this->params);
-
-		if (get_class($responseOrRequest) === "GuzzleHttp\Psr7\Request") {
-			$response = $this->service->getClient()->execute($responseOrRequest,
-				'Google_Service_Gmail_ListMessagesResponse');
-
-			return $response;
-		}
-
 		return $responseOrRequest;
 	}
 }

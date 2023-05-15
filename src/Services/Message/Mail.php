@@ -1,22 +1,23 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Services\Message;
+namespace Cerbaro\LaravelGmail\Services\Message;
 
 use Carbon\Carbon;
-use Dacastro4\LaravelGmail\GmailConnection;
-use Dacastro4\LaravelGmail\Traits\HasDecodableBody;
-use Dacastro4\LaravelGmail\Traits\HasParts;
-use Dacastro4\LaravelGmail\Traits\Modifiable;
-use Dacastro4\LaravelGmail\Traits\Replyable;
-use Google_Service_Gmail;
-use Google_Service_Gmail_MessagePart;
+use Cerbaro\LaravelGmail\GmailConnection;
+use Cerbaro\LaravelGmail\Traits\HasDecodableBody;
+use Cerbaro\LaravelGmail\Traits\HasParts;
+use Cerbaro\LaravelGmail\Traits\Modifiable;
+use Cerbaro\LaravelGmail\Traits\Replyable;
+use Google\Service\Gmail;
+use Google\Service\Gmail\Message;
+use Google\Service\Gmail\MessagePart;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 
 /**
  * Class SingleMessage
  *
- * @package Dacastro4\LaravelGmail\services
+ * @package Cerbaro\LaravelGmail\services
  */
 class Mail extends GmailConnection
 {
@@ -59,33 +60,33 @@ class Mail extends GmailConnection
 	 */
 	public $threadId;
 
-    /**
-     * @var
-     */
-    public $historyId;
+	/**
+	 * @var
+	 */
+	public $historyId;
 
 	/**
-	 * @var \Google_Service_Gmail_MessagePart
+	 * @var MessagePart
 	 */
 	public $payload;
 
 	public $parts;
 
 	/**
-	 * @var Google_Service_Gmail
+	 * @var Gmail
 	 */
 	public $service;
 
-    /**
+	/**
 	 * SingleMessage constructor.
 	 *
-	 * @param \Google_Service_Gmail_Message $message
+	 * @param Message $message
 	 * @param bool $preload
 	 * @param  int 	$userId
 	 */
-	public function __construct(\Google_Service_Gmail_Message $message = null, $preload = false, $userId = null)
+	public function __construct(Message $message = null, $preload = false, $userId = null)
 	{
-		$this->service = new Google_Service_Gmail($this);
+		$this->service = new Gmail($this);
 
 		$this->__rConstruct();
 		$this->__mConstruct();
@@ -119,9 +120,9 @@ class Mail extends GmailConnection
 	/**
 	 * Sets data from mail
 	 *
-	 * @param \Google_Service_Gmail_Message $message
+	 * @param Message $message
 	 */
-	protected function setMessage(\Google_Service_Gmail_Message $message)
+	protected function setMessage(Message $message)
 	{
 		$this->id = $message->getId();
 		$this->internalDate = $message->getInternalDate();
@@ -348,7 +349,6 @@ class Mail extends GmailConnection
 			$item['name'] = str_replace("\"", '', $name ?: null);
 
 			$all[] = $item;
-
 		}
 
 		return $all;
@@ -438,7 +438,7 @@ class Mail extends GmailConnection
 		$parts = $this->getAllParts($this->parts);
 		$has = false;
 
-		/** @var Google_Service_Gmail_MessagePart $part */
+		/** @var Google\Service\Gmail\MessagePart $part */
 		foreach ($parts as $part) {
 			if (!empty($part->body->attachmentId) && $part->getFilename() != null && strlen($part->getFilename()) > 0) {
 				$has = true;
@@ -610,7 +610,7 @@ class Mail extends GmailConnection
 		$headers = [];
 
 		foreach ($emailHeaders as $header) {
-			/** @var \Google_Service_Gmail_MessagePartHeader $header */
+			/** @var \Google\Service\Gmail\MessagePartHeader $header */
 
 			$head = new \stdClass();
 

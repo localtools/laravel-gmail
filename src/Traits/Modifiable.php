@@ -1,12 +1,12 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
-use Dacastro4\LaravelGmail\Services\Message\Mail;
-use Google_Service_Gmail;
+use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Google\Service\Gmail;
 
 /**
- * @property Google_Service_Gmail $service
+ * @property Gmail $service
  */
 trait Modifiable
 {
@@ -105,7 +105,7 @@ trait Modifiable
 	/**
 	 * Send the email to the trash
 	 *
-	 * @return \Dacastro4\LaravelGmail\Services\Message\Mail|\Exception
+	 * @return \Cerbaro\LaravelGmail\Services\Message\Mail|\Exception
 	 */
 	public function sendToTrash()
 	{

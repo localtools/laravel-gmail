@@ -1,10 +1,10 @@
 <?php
 
-namespace Dacastro4\LaravelGmail\Traits;
+namespace Cerbaro\LaravelGmail\Traits;
 
-use Dacastro4\LaravelGmail\Services\Message\Mail;
-use Google_Service_Gmail;
-use Google_Service_Gmail_Message;
+use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Google\Service\Gmail;
+use Google\Service\Gmail\Message;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Illuminate\Container\Container;
@@ -12,7 +12,7 @@ use Illuminate\Mail\Markdown;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 
 /**
- * @property Google_Service_Gmail $service
+ * @property Gmail $service
  */
 trait Replyable
 {
@@ -44,7 +44,7 @@ trait Replyable
 	/**
 	 * Sender's email
 	 *
-	 * @var string
+	 * @var string|array
 	 */
 	private $from;
 
@@ -133,9 +133,16 @@ trait Replyable
 		return $this;
 	}
 
+	/**
+	 * @param string|array $from
+	 * 
+	 * @param string|null $name
+	 * 
+	 * @return Replyable
+	 */
 	public function from($from, $name = null)
 	{
-		$this->from = $from;
+		$this->from = $this->emailList($from, $name);
 		$this->nameFrom = $name;
 
 		return $this;
@@ -170,8 +177,12 @@ trait Replyable
 		$newList = [];
 		$count = 0;
 		foreach ($emails as $key => $email) {
-			$emailName = isset($name[$count]) ? $name[$count] : explode('@', $email)[0];
-			$newList[$email] = $emailName;
+			if (str_contains($key, '@')) {
+				$newList[$key] = $email;
+			} else {
+				$emailName = isset($name[$count]) ? $name[$count] : (isset($name[$key]) ? $name[$key] : explode('@', $email)[0]);
+				$newList[$email] = $emailName;
+			}
 			$count = $count + 1;
 		}
 
@@ -359,7 +370,6 @@ trait Replyable
 		$headers = $this->symfonyEmail->getHeaders();
 
 		$headers->addTextHeader($header, $value);
-
 	}
 
 	private function setReplySubject()
@@ -396,17 +406,17 @@ trait Replyable
 	public abstract function getUser();
 
 	/**
-	 * @return Google_Service_Gmail_Message
+	 * @return Message
 	 */
 	private function getMessageBody()
 	{
-		$body = new Google_Service_Gmail_Message();
+		$body = new Message();
 
 		$this->symfonyEmail
-			->from($this->fromAddress())
-			->to($this->toAddress())
-			->cc($this->returnCopies($this->cc))
-			->bcc($this->returnCopies($this->bcc))
+			->from(...$this->fromAddress())
+			->to(...$this->toAddress())
+			->cc(...$this->ccAddress())
+			->bcc(...$this->bccAddress())
 			->subject($this->subject)
 			->html($this->message)
 			->priority($this->priority);
@@ -421,42 +431,58 @@ trait Replyable
 	}
 
 	/**
-	 * @param array|string $cc
-	 * @return array|string
+	 * @return Address[]
 	 */
-	public function returnCopies($cc)
+	public function ccAddress()
 	{
-		if ($cc) {
-			$final = $this->cc;
-
-			if (is_array($this->cc)) {
-				foreach ($this->cc as $emailCc => $nameCc) {
-					$final[] = new Address($emailCc, $nameCc);
-				}
-			}
-
-			return $final;
-		}
-
-		return [];
+		return $this->mapAddress($this->cc, $this->nameCc);
 	}
 
+	/**
+	 * @return Address[]
+	 */
+	public function bccAddress()
+	{
+		return $this->mapAddress($this->bcc, $this->nameBcc);
+	}
+
+	/**
+	 * @return Address[]
+	 */
 	public function toAddress()
 	{
-		if ($this->to) {
-			return new Address($this->to, $this->nameTo ?: '');
-		}
-
-		return [];
+		return $this->mapAddress($this->to, $this->nameTo);
 	}
 
+	/**
+	 * @return Address[]
+	 */
 	public function fromAddress()
 	{
-		if ($this->from) {
-			return new Address($this->from, $this->nameFrom ?: '');
+		return $this->mapAddress($this->from, $this->nameFrom);
+	}
+
+	/**
+	 * @param array|string $email
+	 * @param string|null $name
+	 * @return Address[]
+	 */
+	private function mapAddress($email, $name = null)
+	{
+		/** @var Address[] */
+		$result = [];
+
+		if ($email) {
+			if (is_array($email)) {
+				foreach ($email as $emailAddress => $emailName) {
+					$result[] = new Address($emailAddress, $emailName);
+				}
+			} else {
+				$result[] = new Address($email, $name ?: '');
+			}
 		}
 
-		return [];
+		return $result;
 	}
 
 	private function base64_encode($data)
@@ -478,5 +504,5 @@ trait Replyable
 		return $this;
 	}
 
-	protected abstract function setMessage(\Google_Service_Gmail_Message $message);
+	protected abstract function setMessage(Message $message);
 }
