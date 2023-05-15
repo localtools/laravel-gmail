@@ -15,11 +15,6 @@ Gmail API for Laravel 9
 
 You need to create an application in the [Google Console](https://console.developers.google.com/apis/credentials). Guidance [here](https://developers.google.com/gmail/api/quickstart/php#step_1_turn_on_the_api_name).
 
-if you need **Laravel 5** compatibility please use version `2.0.x`.
-if you need **Laravel 6** compatibility please use version `3.0.x`.
-if you need **Laravel 7** compatibility please use version `4.0.x`.
-if you need **Laravel 8** compatibility please use version `5.0.x`.
-
 # Requirements
 
 - PHP ^8.0
@@ -29,7 +24,7 @@ if you need **Laravel 8** compatibility please use version `5.0.x`.
 
 Add cerbaro/laravel-gmail to composer.json.
 
-`"cerbaro/laravel-gmail": "^6.1"`
+`"cerbaro/laravel-gmail": "^1.0"`
 
 Run composer update to pull down the latest version.
 
