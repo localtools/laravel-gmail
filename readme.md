@@ -2,9 +2,7 @@
 
 ### **This project is a fork of [dacastro4/laravel-gmail](https://github.com/dacastro4/laravel-gmail/)**
 
-[![Build Status](https://scrutinizer-ci.com/g/cerbaro/laravel-gmail/badges/build.png?b=master)](https://scrutinizer-ci.com/g/cerbaro/laravel-gmail/build-status/master)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/cerbaro/laravel-gmail/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cerbaro/laravel-gmail/?branch=master)
-[![GitHub issues](https://img.shields.io/github/issues/cerbaro/laravel-gmail.svg)](https://github.com/adrianbrs/laravel-gmail/issues)
+[![GitHub issues](https://img.shields.io/github/issues/adrianbrs/laravel-gmail)](https://github.com/adrianbrs/laravel-gmail/issues)
 [![Total Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/downloads)](https://packagist.org/packages/cerbaro/laravel-gmail)
 [![Monthly Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/d/monthly)](https://packagist.org/packages/cerbaro/laravel-gmail)
 [![GitHub license](https://img.shields.io/github/license/cerbaro/laravel-gmail.svg)](https://github.com/adrianbrs/laravel-gmail/blob/master/LICENSE)
