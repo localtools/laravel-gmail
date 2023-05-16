@@ -177,7 +177,9 @@ trait Replyable
 		$newList = [];
 		$count = 0;
 		foreach ($emails as $key => $email) {
-			if (str_contains($key, '@')) {
+			if ($email instanceof Address) {
+				$newList[$email->getAddress()] = $email->getName();
+			} else if (str_contains($key, '@')) {
 				$newList[$key] = $email;
 			} else {
 				$emailName = isset($name[$count]) ? $name[$count] : (isset($name[$key]) ? $name[$key] : explode('@', $email)[0]);
