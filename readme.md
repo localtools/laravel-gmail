@@ -22,7 +22,7 @@ You need to create an application in the [Google Console](https://console.develo
 
 Add cerbaro/laravel-gmail to composer.json.
 
-`"cerbaro/laravel-gmail": "^1.1"`
+`"cerbaro/laravel-gmail": "^2.0"`
 
 Run composer update to pull down the latest version.
 
