@@ -5,7 +5,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/adrianbrs/laravel-gmail)](https://github.com/adrianbrs/laravel-gmail/issues)
 [![Total Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/downloads)](https://packagist.org/packages/cerbaro/laravel-gmail)
 [![Monthly Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/d/monthly)](https://packagist.org/packages/cerbaro/laravel-gmail)
-[![GitHub license](https://img.shields.io/github/license/cerbaro/laravel-gmail.svg)](https://github.com/adrianbrs/laravel-gmail/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/adrianbrs/laravel-gmail)](https://github.com/adrianbrs/laravel-gmail/blob/master/LICENSE)
 
 # Gmail
 
