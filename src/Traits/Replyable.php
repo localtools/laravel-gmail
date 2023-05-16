@@ -42,6 +42,17 @@ trait Replyable
 	private $subject;
 
 	/**
+
+	 * @var string|array
+	 */
+	private $replyTo;
+
+	/**
+	 * @var  string
+	 */
+	private $replyToName;
+
+	/**
 	 * Sender's email
 	 *
 	 * @var string|array
@@ -202,6 +213,21 @@ trait Replyable
 	{
 		$this->bcc = $this->emailList($bcc, $name);
 		$this->nameBcc = $name;
+
+		return $this;
+	}
+
+	/**
+	 * @param array|string $replyTo
+	 *
+	 * @param string|null $name
+	 *
+	 * @return Replyable
+	 */
+	public function replyTo($replyTo, $name = null)
+	{
+		$this->replyTo = $this->emailList($replyTo, $name);
+		$this->replyToName = $name;
 
 		return $this;
 	}
@@ -419,6 +445,7 @@ trait Replyable
 			->to(...$this->toAddress())
 			->cc(...$this->ccAddress())
 			->bcc(...$this->bccAddress())
+			->replyTo(...$this->replyToAddress())
 			->subject($this->subject)
 			->html($this->message)
 			->priority($this->priority);
@@ -430,6 +457,14 @@ trait Replyable
 		$body->setRaw($this->base64_encode($this->symfonyEmail->toString()));
 
 		return $body;
+	}
+
+	/**
+	 * @return Address[]
+	 */
+	public function replyToAddress()
+	{
+		return $this->mapAddress($this->replyTo, $this->replyToName);
 	}
 
 	/**
