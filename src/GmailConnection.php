@@ -304,4 +304,18 @@ class GmailConnection extends Client
 
 		return $service->users_history->listUsersHistory($userEmail, $params);
 	}
+
+	/**
+	 * Lists the send-as aliases for the specified account.
+	 * The result includes the primary send-as address associated with the account as well as any custom "from" aliases.
+	 * (sendAs.listUsersSettingsSendAs)
+	 * @param $userId
+	 * @param $params
+	 * @return \Google\Service\Gmail\ListSendAsResponse
+	 */
+	public function listAliases($userId = 'me', $params = [])
+	{
+		$service = new Gmail($this);
+		return $service->users_settings_sendAs->listUsersSettingsSendAs($userId, $params);
+	}
 }
