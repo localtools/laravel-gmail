@@ -1,5 +1,5 @@
 {
-  "name": "cerbaro/laravel-gmail",
+  "name": "localtools/laravel-gmail",
   "description": "Gmail API package for Laravel",
   "keywords": [
     "api",
@@ -17,6 +17,11 @@
       "name": "Adrian Cerbaro",
       "email": "adrian@cerbaro.dev",
       "homepage": "https://cerbaro.dev"
+    },
+     {
+      "name": "localtools",
+      "email": "",
+      "homepage": "https://github.com/localtools"
     }
   ],
   "require": {
