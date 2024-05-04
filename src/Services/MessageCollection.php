@@ -12,22 +12,22 @@ class MessageCollection extends Collection
 	 */
 	private Message $message;
 
-    /**
-     * MessageCollection constructor.
-     *
-     * @param array $items
-     * @param Message|null $message
-     */
+	/**
+	 * MessageCollection constructor.
+	 *
+	 * @param array $items
+	 * @param Message|null $message
+	 */
 	public function __construct($items = [], Message $message = null)
 	{
 		parent::__construct($items);
 		$this->message = $message;
 	}
 
-    /**
-     * @throws Exception
-     */
-    public function next()
+	/**
+	 * @throws Exception
+	 */
+	public function next()
 	{
 		return $this->message->next();
 	}
@@ -38,7 +38,7 @@ class MessageCollection extends Collection
 	 * @return bool
 	 */
 	public function hasNextPage(): bool
-    {
+	{
 		return !!$this->message->pageToken;
 	}
 
@@ -48,7 +48,7 @@ class MessageCollection extends Collection
 	 * @return string
 	 */
 	public function getPageToken(): string
-    {
+	{
 		return $this->message->pageToken;
 	}
 }

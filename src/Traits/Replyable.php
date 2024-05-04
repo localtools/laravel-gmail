@@ -43,8 +43,8 @@ trait Replyable
 
 	/**
 
-	 * @var string|array
-	 */
+		   * @var string|array
+		   */
 	private $replyTo;
 
 	/**
