@@ -9,38 +9,31 @@
   "license": "MIT",
   "authors": [
     {
-      "name": "Daniel Castro",
-      "email": "danielcastro04@gmail.com",
-      "homepage": "https://danielcastro.dev"
-    },
-    {
-      "name": "Adrian Cerbaro",
-      "email": "adrian@cerbaro.dev",
-      "homepage": "https://cerbaro.dev"
-    },
-    {
       "name": "localtools",
       "email": "hebertcisco@outlook.com",
       "homepage": "https://github.com/localtools"
     }
   ],
   "require": {
-    "php": "^7.4|^8.1",
+    "php": "^8.0",
     "ext-json": "*",
     "google/apiclient": "^2.14",
-    "illuminate/auth": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "illuminate/config": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "illuminate/database": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "illuminate/routing": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "illuminate/session": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
-    "illuminate/support": "~5.8|^6.0|^7.0|^8.0|^9.0|^10.0",
+    "illuminate/auth": "^9.0|^10.0|^11.0",
+    "illuminate/config": "^9.0|^10.0|^11.0",
+    "illuminate/database": "^9.0|^10.0|^11.0",
+    "illuminate/routing": "^9.0|^10.0|^11.0",
+    "illuminate/session": "^9.0|^10.0|^11.0",
+    "illuminate/support": "^9.0|^10.0|^11.0",
     "symfony/mime": "^5.4|^6.0"
   },
   "require-dev": {
     "google/apiclient-services": "^0.300.0",
-    "mockery/mockery": "^1.0",
     "orchestra/testbench": "^v4.18.0|^v5.20.0|^v6.25.0|^8.0",
-    "phpunit/phpunit": "^9.3",
+    "phpstan/phpstan": "^1.10",
+    "php-http/guzzle7-adapter": "^1.0",
+    "mockery/mockery": "^1.0",
+    "typesense/typesense-php": "^4.9.2",
+    "phpunit/phpunit": "^9.3|^10.4",
     "squizlabs/php_codesniffer": "~3.4"
   },
   "autoload": {
@@ -50,7 +43,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Tests\\": "tests/"
+      "Localtools\\LaravelGmail\\Tests\\": "tests/"
     }
   },
   "extra": {
@@ -63,10 +56,20 @@
       }
     }
   },
+  "suggest": {
+    "typesense/typesense-php": "Required to use the Typesense engine (^4.9).",
+    "google/apiclient-services": "Required to use the Google API services (^0.300).",
+    "php-http/guzzle7-adapter": "Required to use the Guzzle 7 adapter (^1.0).",
+    "orchestra/testbench": "Required to use the Orchestra Testbench (^v4.18|^v5.20|^v6.25|^8.0).",
+    "phpstan/phpstan": "Required to use the PHPStan (^1.10)."
+  },
   "config": {
     "preferred-install": "dist",
     "sort-packages": true,
-    "optimize-autoloader": true
+    "optimize-autoloader": true,
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
   },
   "minimum-stability": "dev",
   "prefer-stable": true
