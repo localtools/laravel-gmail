@@ -1,8 +1,8 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Traits;
+namespace Localtools\LaravelGmail\Traits;
 
-use Cerbaro\LaravelGmail\Services\Message;
+use Localtools\LaravelGmail\Services\Message;
 
 trait Filterable
 {

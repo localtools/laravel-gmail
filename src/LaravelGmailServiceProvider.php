@@ -1,6 +1,6 @@
 <?php
 
-namespace Cerbaro\LaravelGmail;
+namespace Localtools\LaravelGmail;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;

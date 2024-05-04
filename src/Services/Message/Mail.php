@@ -1,13 +1,13 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Services\Message;
+namespace Localtools\LaravelGmail\Services\Message;
 
 use Carbon\Carbon;
-use Cerbaro\LaravelGmail\GmailConnection;
-use Cerbaro\LaravelGmail\Traits\HasDecodableBody;
-use Cerbaro\LaravelGmail\Traits\HasParts;
-use Cerbaro\LaravelGmail\Traits\Modifiable;
-use Cerbaro\LaravelGmail\Traits\Replyable;
+use Localtools\LaravelGmail\GmailConnection;
+use Localtools\LaravelGmail\Traits\HasDecodableBody;
+use Localtools\LaravelGmail\Traits\HasParts;
+use Localtools\LaravelGmail\Traits\Modifiable;
+use Localtools\LaravelGmail\Traits\Replyable;
 use Google\Service\Gmail;
 use Google\Service\Gmail\Message;
 use Google\Service\Gmail\MessagePart;

@@ -1,9 +1,9 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Services\Message;
+namespace Localtools\LaravelGmail\Services\Message;
 
-use Cerbaro\LaravelGmail\GmailConnection;
-use Cerbaro\LaravelGmail\Traits\HasDecodableBody;
+use Localtools\LaravelGmail\GmailConnection;
+use Localtools\LaravelGmail\Traits\HasDecodableBody;
 use Google\Service\Gmail;
 use Google\Service\Gmail\MessagePart;
 use Illuminate\Support\Facades\Storage;
@@ -18,13 +18,13 @@ class Attachment extends GmailConnection
 	 */
 	public $body;
 	/**
-	 * @var
-	 */
-	public $id;
+	 * @var string
+     */
+	public string $id;
 	/**
-	 * @var
-	 */
-	public $filename;
+	 * @var string
+     */
+	public string $filename;
 	/**
 	 * @var
 	 */

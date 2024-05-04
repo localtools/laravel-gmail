@@ -1,8 +1,8 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Traits;
+namespace Localtools\LaravelGmail\Traits;
 
-use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Localtools\LaravelGmail\Services\Message\Mail;
 use Google\Service\Gmail;
 use Google\Service\Gmail\Message;
 use Symfony\Component\Mime\Address;
