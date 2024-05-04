@@ -182,7 +182,7 @@ class GmailConnection extends Client
     {
         if (!$this->check()) {
             $request = Request::capture();
-            $code = (string)$request->input('code', null);
+            $code = (string) $request->input('code', null);
             if (!is_null($code) && !empty($code)) {
                 $accessToken = $this->fetchAccessTokenWithAuthCode($code);
                 if ($this->haveReadScope()) {

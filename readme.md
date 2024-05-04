@@ -7,22 +7,18 @@
 [![Monthly Downloads](https://poser.pugx.org/localtools/laravel-gmail/d/monthly)](https://packagist.org/packages/localtools/laravel-gmail)
 [![GitHub license](https://img.shields.io/github/license/localtools/laravel-gmail)](https://github.com/localtools/laravel-gmail/blob/master/LICENSE)
 
-# Gmail
+## Gmail
 
-Gmail API for Laravel 9
+Gmail API for Laravel 10
 
 You need to create an application in the [Google Console](https://console.developers.google.com/apis/credentials). Guidance [here](https://developers.google.com/gmail/api/quickstart/php#step_1_turn_on_the_api_name).
 
-# Requirements
+## Requirements
 
 - PHP ^8.0
-- Laravel 9
+- Laravel 10
 
-# Installation
-
-Add localtools/laravel-gmail to composer.json.
-
-`"localtools/laravel-gmail": "^0.0.1"`
+## Installation
 
 Run composer update to pull down the latest version.
 
@@ -50,26 +46,26 @@ For laravel >=5.5 that's all. This package supports Laravel new [Package Discove
 
 For <= PHP 7.4 compatibility use version `v5.0`
 
-# Migration from 5.0 to 6.0
+## Migration from 5.0 to 6.0
 
 Requires Laravel 9 and you have to change the dependency to `"laravel/laravel": "^9.0"`
 Please, follow [Upgrading To 9.0 From 8.x Guide](https://laravel.com/docs/9.x/upgrade)
 
-# Migration from 4.0 to 5.0
+## Migration from 4.0 to 5.0
 
 Requires Laravel 8 and you have to change the dependency to `"laravel/laravel": "^8.0"`
 Please, follow [Upgrading To 8.0 From 7.x Guide](https://laravel.com/docs/8.x/upgrade)
 
-# Migration from 3.0 to 4.0
+## Migration from 3.0 to 4.0
 
 Requires Laravel 7 and you have to change the dependency to `"laravel/laravel": "^7.0"`
 Please, follow [Upgrading To 7.0 From 6.x Guide](https://laravel.com/docs/7.x/upgrade)
 
-# Migration from 2.0 to 3.0
+## Migration from 2.0 to 3.0
 
 Requires Laravel 6 and you only have to change the dependency to `"laravel/laravel": "^6.0"`
 
-# Migration from 1.0 to 2.0
+## Migration from 1.0 to 2.0
 
 The only changed made was the multi credentials feature.
 
@@ -88,7 +84,7 @@ Replyable Class
 
 and so on.
 
-# Migration from 0.6 to 1.0
+## Migration from 0.6 to 1.0
 
 The only changed made was the multi credentials feature.
 
@@ -97,7 +93,7 @@ The only changed made was the multi credentials feature.
 If you don't want the multi user credentials, you don't have to do anything else, if you do, you're going to have to
 login again to create a new credentials file per user.
 
-# Configuration
+## Configuration
 
 You only have to set the following variables on your `.env` file and you'll be on your way:
 

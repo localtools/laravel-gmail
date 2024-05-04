@@ -23,9 +23,9 @@ class Mail extends GmailConnection
 {
 
 	use HasDecodableBody,
-		Modifiable,
-		HasParts,
-		Replyable {
+	Modifiable,
+	HasParts,
+	Replyable {
 		Replyable::__construct as private __rConstruct;
 		Modifiable::__construct as private __mConstruct;
 	}
@@ -247,7 +247,7 @@ class Mail extends GmailConnection
 		$name = preg_replace('/ <(.*)>/', '', $from);
 
 		return [
-			'name'  => $name,
+			'name' => $name,
 			'email' => isset($matches[1]) ? $matches[1] : null,
 		];
 	}

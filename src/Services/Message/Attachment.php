@@ -19,11 +19,11 @@ class Attachment extends GmailConnection
 	public $body;
 	/**
 	 * @var string
-     */
+	 */
 	public string $id;
 	/**
 	 * @var string
-     */
+	 */
 	public string $filename;
 	/**
 	 * @var

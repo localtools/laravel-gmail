@@ -106,7 +106,7 @@ class Message
 	 */
 	public function take($number)
 	{
-		$this->params['maxResults'] = abs((int)$number);
+		$this->params['maxResults'] = abs((int) $number);
 
 		return $this;
 	}
