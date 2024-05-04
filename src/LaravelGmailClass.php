@@ -1,9 +1,9 @@
 <?php
 
-namespace Cerbaro\LaravelGmail;
+namespace Localtools\LaravelGmail;
 
-use Cerbaro\LaravelGmail\Exceptions\AuthException;
-use Cerbaro\LaravelGmail\Services\Message;
+use Localtools\LaravelGmail\Exceptions\AuthException;
+use Localtools\LaravelGmail\Services\Message;
 use Illuminate\Support\Facades\Redirect;
 
 class LaravelGmailClass extends GmailConnection

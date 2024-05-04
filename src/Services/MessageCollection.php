@@ -1,7 +1,8 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Services;
+namespace Localtools\LaravelGmail\Services;
 
+use Google\Exception;
 use Illuminate\Support\Collection;
 
 class MessageCollection extends Collection
@@ -9,21 +10,24 @@ class MessageCollection extends Collection
 	/**
 	 * @var Message
 	 */
-	private $message;
+	private Message $message;
 
-	/**
-	 * MessageCollection constructor.
-	 *
-	 * @param Message $message
-	 * @param array $items
-	 */
+    /**
+     * MessageCollection constructor.
+     *
+     * @param array $items
+     * @param Message|null $message
+     */
 	public function __construct($items = [], Message $message = null)
 	{
 		parent::__construct($items);
 		$this->message = $message;
 	}
 
-	public function next()
+    /**
+     * @throws Exception
+     */
+    public function next()
 	{
 		return $this->message->next();
 	}
@@ -33,8 +37,8 @@ class MessageCollection extends Collection
 	 *
 	 * @return bool
 	 */
-	public function hasNextPage()
-	{
+	public function hasNextPage(): bool
+    {
 		return !!$this->message->pageToken;
 	}
 
@@ -43,8 +47,8 @@ class MessageCollection extends Collection
 	 *
 	 * @return string
 	 */
-	public function getPageToken()
-	{
+	public function getPageToken(): string
+    {
 		return $this->message->pageToken;
 	}
 }

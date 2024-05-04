@@ -1,9 +1,10 @@
 <?php
+namespace Tests;
 
-use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Localtools\LaravelGmail\Services\Message\Mail;
 use Illuminate\Container\Container;
 use Illuminate\Mail\Markdown;
-use Tests\TestCase;
+use Mockery;
 
 class LaravelGmailTest extends TestCase
 {

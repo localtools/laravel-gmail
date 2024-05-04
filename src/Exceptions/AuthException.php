@@ -1,7 +1,10 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Exceptions;
+namespace Localtools\LaravelGmail\Exceptions;
 
-class AuthException extends \Exception
+use Exception;
+
+class AuthException extends Exception
 {
+    //
 }

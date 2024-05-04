@@ -1,11 +1,11 @@
 <?php
 
-namespace Cerbaro\LaravelGmail\Services;
+namespace Localtools\LaravelGmail\Services;
 
-use Cerbaro\LaravelGmail\LaravelGmailClass;
-use Cerbaro\LaravelGmail\Services\Message\Mail;
-use Cerbaro\LaravelGmail\Traits\Filterable;
-use Cerbaro\LaravelGmail\Traits\SendsParameters;
+use Localtools\LaravelGmail\LaravelGmailClass;
+use Localtools\LaravelGmail\Services\Message\Mail;
+use Localtools\LaravelGmail\Traits\Filterable;
+use Localtools\LaravelGmail\Traits\SendsParameters;
 use Google\Service\Gmail;
 use Psr\Http\Message\RequestInterface;
 
