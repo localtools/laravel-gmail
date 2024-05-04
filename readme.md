@@ -2,10 +2,10 @@
 
 ### **This project is a fork of [dacastro4/laravel-gmail](https://github.com/dacastro4/laravel-gmail/)**
 
-[![GitHub issues](https://img.shields.io/github/issues/adrianbrs/laravel-gmail)](https://github.com/adrianbrs/laravel-gmail/issues)
-[![Total Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/downloads)](https://packagist.org/packages/cerbaro/laravel-gmail)
-[![Monthly Downloads](https://poser.pugx.org/cerbaro/laravel-gmail/d/monthly)](https://packagist.org/packages/cerbaro/laravel-gmail)
-[![GitHub license](https://img.shields.io/github/license/adrianbrs/laravel-gmail)](https://github.com/adrianbrs/laravel-gmail/blob/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/localtools/laravel-gmail)](https://github.com/localtools/laravel-gmail/issues)
+[![Total Downloads](https://poser.pugx.org/localtools/laravel-gmail/downloads)](https://packagist.org/packages/localtools/laravel-gmail)
+[![Monthly Downloads](https://poser.pugx.org/localtools/laravel-gmail/d/monthly)](https://packagist.org/packages/localtools/laravel-gmail)
+[![GitHub license](https://img.shields.io/github/license/localtools/laravel-gmail)](https://github.com/localtools/laravel-gmail/blob/master/LICENSE)
 
 # Gmail
 
@@ -20,21 +20,21 @@ You need to create an application in the [Google Console](https://console.develo
 
 # Installation
 
-Add cerbaro/laravel-gmail to composer.json.
+Add localtools/laravel-gmail to composer.json.
 
-`"cerbaro/laravel-gmail": "^2.1.0"`
+`"localtools/laravel-gmail": "^0.0.1"`
 
 Run composer update to pull down the latest version.
 
 Or run
 
-`composer require cerbaro/laravel-gmail`
+`composer require localtools/laravel-gmail`
 
 Now open up `config/app.php` and add the service provider to your providers array.
 
 ```php
 'providers' => [
-    Cerbaro\LaravelGmail\LaravelGmailServiceProvider::class,
+    Localtools\LaravelGmail\LaravelGmailServiceProvider::class,
 ]
 ```
 
@@ -42,7 +42,7 @@ Now add the alias.
 
 ```php
 'aliases' => [
-    'LaravelGmail' => Cerbaro\LaravelGmail\Facade\LaravelGmail::class,
+    'LaravelGmail' => Localtools\LaravelGmail\Facade\LaravelGmail::class,
 ]
 ```
 
@@ -73,7 +73,7 @@ Requires Laravel 6 and you only have to change the dependency to `"laravel/larav
 
 The only changed made was the multi credentials feature.
 
-- Change your composer.json from `"cerbaro/laravel-gmail": "^1.0"` to `"cerbaro/laravel-gmail": "^2.0"`
+- Change your composer.json from `"localtools/laravel-gmail": "^1.0"` to `"localtools/laravel-gmail": "^2.0"`
 
 I had to change version because of a typo and that might break apps calling those attributes.
 
@@ -92,7 +92,7 @@ and so on.
 
 The only changed made was the multi credentials feature.
 
-- Change your composer.json from `"cerbaro/laravel-gmail": "^0.6"` to `"cerbaro/laravel-gmail": "^1.0"`
+- Change your composer.json from `"localtools/laravel-gmail": "^0.6"` to `"localtools/laravel-gmail": "^1.0"`
 
 If you don't want the multi user credentials, you don't have to do anything else, if you do, you're going to have to
 login again to create a new credentials file per user.
@@ -112,7 +112,7 @@ GOOGLE_ALLOW_JSON_ENCRYPT
 
 To modify the scopes and the credentials file name, just run:
 
-Run `php artisan vendor:publish --provider="Cerbaro\LaravelGmail\LaravelGmailServiceProvider"` and modify the config file `config/gmail.php`.
+Run `php artisan vendor:publish --provider="Localtools\LaravelGmail\LaravelGmailServiceProvider"` and modify the config file `config/gmail.php`.
 
 ### Allow multi user credentials
 
@@ -228,7 +228,7 @@ Generally speaking, it is a bad practice to use API for pagination. It is slow a
 ## Sending
 
 ```
-use Cerbaro\LaravelGmail\Services\Message\Mail;
+use Localtools\LaravelGmail\Services\Message\Mail;
 
 ...
 
@@ -371,7 +371,7 @@ Example:
 ## Attachment
 
 ```
-use Cerbaro\LaravelGmail\Services\Message\Attachment
+use Localtools\LaravelGmail\Services\Message\Attachment
 ...
 
 $attachment = new Attachment;
@@ -417,7 +417,7 @@ To get all unread emails: `LaravelGmail::message()->unread()->all()`
 
 `message()->raw($query)` for customized queries
 
-All the possible filters are in the [Filterable Trait](https://github.com/adrianbrs/laravel-gmail/blob/master/src/Traits/Filterable.php)
+All the possible filters are in the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
 
 Of course you can use as a fluent api.
 
@@ -434,7 +434,7 @@ Of course you can use as a fluent api.
 ## Attachment
 
 ```
-use Cerbaro\LaravelGmail\Services\Message\Attachment
+use Localtools\LaravelGmail\Services\Message\Attachment
 ...
 
 $attachment = new Attachment;
@@ -480,7 +480,7 @@ To get all unread emails: `LaravelGmail::message()->unread()->all()`
 
 `message()->raw($query)` for customized queries
 
-All the possible filters are in the [Filterable Trait](https://github.com/adrianbrs/laravel-gmail/blob/master/src/Traits/Filterable.php)
+All the possible filters are in the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
 
 Of course you can use as a fluent api.
 
