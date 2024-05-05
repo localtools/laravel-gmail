@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Localtools\LaravelGmail\Tests;
 
 use Orchestra\Testbench\TestCase as TC;
 
