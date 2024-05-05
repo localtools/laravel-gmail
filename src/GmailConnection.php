@@ -2,6 +2,11 @@
 
 namespace Localtools\LaravelGmail;
 
+use Google\Service\Gmail\ListHistoryResponse;
+use Google\Service\Gmail\ListSendAsResponse;
+use Google\Service\Gmail\Profile;
+use Google\Service\Gmail\WatchRequest;
+use Google\Service\Gmail\WatchResponse;
 use Localtools\LaravelGmail\Traits\Configurable;
 use Localtools\LaravelGmail\Traits\HasLabels;
 use Google\Client;
@@ -17,15 +22,15 @@ class GmailConnection extends Client
         __construct as configConstruct;
     }
 
-    protected $emailAddress;
-    protected $refreshToken;
-    protected $app;
-    protected $accessToken;
-    protected $token;
-    private $configuration;
-    public $userId;
+    protected string $emailAddress;
+    protected string $refreshToken;
+    protected mixed $app;
+    protected string $accessToken;
+    protected mixed $token;
+    private mixed $configuration;
+    public string|int|null $userId;
 
-    public function __construct($config = null, $userId = null)
+    public function __construct($config = null, ?string $userId = null)
     {
         $this->app = Container::getInstance();
 
@@ -49,7 +54,7 @@ class GmailConnection extends Client
      *
      * @return bool
      */
-    public function checkPreviouslyLoggedIn()
+    public function checkPreviouslyLoggedIn(): bool
     {
         $fileName = $this->getFileName();
         $file = "gmail/tokens/$fileName.json";
@@ -73,7 +78,7 @@ class GmailConnection extends Client
      *
      * @return mixed|null
      */
-    private function refreshTokenIfNeeded()
+    private function refreshTokenIfNeeded(): mixed
     {
         if ($this->isAccessTokenExpired()) {
             $this->fetchAccessTokenWithRefreshToken($this->getRefreshToken());
@@ -93,7 +98,7 @@ class GmailConnection extends Client
      *
      * @return bool Returns True if the access_token is expired.
      */
-    public function isAccessTokenExpired()
+    public function isAccessTokenExpired(): bool
     {
         $token = $this->getToken();
 
@@ -109,22 +114,20 @@ class GmailConnection extends Client
         return parent::getAccessToken() ?: $this->config();
     }
 
-    public function setToken($token)
+    public function setToken($token): void
     {
         $this->setAccessToken($token);
     }
 
     public function getAccessToken()
     {
-        $token = parent::getAccessToken() ?: $this->config();
-
-        return $token;
+        return parent::getAccessToken() ?: $this->config();
     }
 
     /**
      * @param array|string $token
      */
-    public function setAccessToken($token)
+    public function setAccessToken($token): void
     {
         parent::setAccessToken($token);
     }
@@ -132,7 +135,7 @@ class GmailConnection extends Client
     /**
      * @param $token
      */
-    public function setBothAccessToken($token)
+    public function setBothAccessToken($token): void
     {
         $this->setAccessToken($token);
         $this->saveAccessToken($token);
@@ -143,7 +146,7 @@ class GmailConnection extends Client
      *
      * @param array $config
      */
-    public function saveAccessToken(array $config)
+    public function saveAccessToken(array $config): void
     {
         $disk = Storage::disk('local');
         $fileName = $this->getFileName();
@@ -178,12 +181,12 @@ class GmailConnection extends Client
      * @return array|string
      * @throws \Exception
      */
-    public function makeToken()
+    public function makeToken(): array|string
     {
         if (!$this->check()) {
             $request = Request::capture();
-            $code = (string) $request->input('code', null);
-            if (!is_null($code) && !empty($code)) {
+            $code = (string)$request->input('code', null);
+            if (!empty($code)) {
                 $accessToken = $this->fetchAccessTokenWithAuthCode($code);
                 if ($this->haveReadScope()) {
                     $me = $this->getProfile();
@@ -208,7 +211,7 @@ class GmailConnection extends Client
      *
      * @return bool
      */
-    public function check()
+    public function check(): bool
     {
         return !$this->isAccessTokenExpired();
     }
@@ -216,9 +219,9 @@ class GmailConnection extends Client
     /**
      * Gets user profile from Gmail
      *
-     * @return \Google\Service\Gmail\Profile
+     * @return Profile
      */
-    public function getProfile()
+    public function getProfile(): Profile
     {
         $service = new Gmail($this);
 
@@ -228,7 +231,7 @@ class GmailConnection extends Client
     /**
      * Revokes user's permission and logs them out
      */
-    public function logout()
+    public function logout(): void
     {
         $this->revokeToken();
     }
@@ -236,7 +239,7 @@ class GmailConnection extends Client
     /**
      * Delete the credentials in a file
      */
-    public function deleteAccessToken()
+    public function deleteAccessToken(): void
     {
         $disk = Storage::disk('local');
         $fileName = $this->getFileName();
@@ -255,7 +258,7 @@ class GmailConnection extends Client
         }
     }
 
-    private function haveReadScope()
+    private function haveReadScope(): bool
     {
         $scopes = $this->getUserScopes();
 
@@ -269,7 +272,7 @@ class GmailConnection extends Client
      * @param array $optParams
      * @return mixed
      */
-    public function stopWatch($userEmail, $optParams = [])
+    public function stopWatch(string $userEmail, array $optParams = []): mixed
     {
         $service = new Gmail($this);
 
@@ -280,11 +283,11 @@ class GmailConnection extends Client
      * Set up or update a push notification watch on the given user mailbox.
      *
      * @param string $userEmail Email address
-     * @param \Google\Service\Gmail\WatchRequest $postData
+     * @param WatchRequest $postData
      *
-     * @return \Google\Service\Gmail\WatchResponse
+     * @return WatchResponse
      */
-    public function setWatch($userEmail, \Google\Service\Gmail\WatchRequest $postData): \Google\Service\Gmail\WatchResponse
+    public function setWatch(string $userEmail, WatchRequest $postData): WatchResponse
     {
         $service = new Gmail($this);
 
@@ -295,9 +298,9 @@ class GmailConnection extends Client
      * Lists the history of all changes to the given mailbox. History results are returned in chronological order (increasing historyId).
      * @param $userEmail
      * @param $params
-     * @return \Google\Service\Gmail\ListHistoryResponse
+     * @return ListHistoryResponse
      */
-    public function historyList($userEmail, $params)
+    public function historyList($userEmail, $params): ListHistoryResponse
     {
         $service = new Gmail($this);
 
@@ -308,11 +311,11 @@ class GmailConnection extends Client
      * Lists the send-as aliases for the specified account.
      * The result includes the primary send-as address associated with the account as well as any custom "from" aliases.
      * (sendAs.listUsersSettingsSendAs)
-     * @param $userId
-     * @param $params
-     * @return \Google\Service\Gmail\ListSendAsResponse
+     * @param string|int|null $userId
+     * @param array $params
+     * @return ListSendAsResponse
      */
-    public function listAliases($userId = 'me', $params = [])
+    public function listAliases(string|int|null $userId = 'me', array $params = []): ListSendAsResponse
     {
         $service = new Gmail($this);
         return $service->users_settings_sendAs->listUsersSettingsSendAs($userId, $params);

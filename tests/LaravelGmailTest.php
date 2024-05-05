@@ -1,5 +1,6 @@
 <?php
-namespace Tests;
+
+namespace Localtools\LaravelGmail\Tests;
 
 use Localtools\LaravelGmail\Services\Message\Mail;
 use Illuminate\Container\Container;

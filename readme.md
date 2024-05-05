@@ -11,7 +11,8 @@
 
 Gmail API for Laravel 10
 
-You need to create an application in the [Google Console](https://console.developers.google.com/apis/credentials). Guidance [here](https://developers.google.com/gmail/api/quickstart/php#step_1_turn_on_the_api_name).
+You need to create an application in the [Google Console](https://console.developers.google.com/apis/credentials).
+Guidance [here](https://developers.google.com/gmail/api/quickstart/php#step_1_turn_on_the_api_name).
 
 ## Requirements
 
@@ -42,7 +43,8 @@ Now add the alias.
 ]
 ```
 
-For laravel >=5.5 that's all. This package supports Laravel new [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery).
+For laravel >=5.5 that's all. This package supports Laravel
+new [Package Discovery](https://laravel.com/docs/5.5/packages#package-discovery).
 
 For <= PHP 7.4 compatibility use version `v5.0`
 
@@ -108,11 +110,13 @@ GOOGLE_ALLOW_JSON_ENCRYPT
 
 To modify the scopes and the credentials file name, just run:
 
-Run `php artisan vendor:publish --provider="Localtools\LaravelGmail\LaravelGmailServiceProvider"` and modify the config file `config/gmail.php`.
+Run `php artisan vendor:publish --provider="Localtools\LaravelGmail\LaravelGmailServiceProvider"` and modify the config
+file `config/gmail.php`.
 
 ### Allow multi user credentials
 
-To allow multi user credentials change `allow_multiple_credentials` to `true` in your config file or set the .env variable
+To allow multi user credentials change `allow_multiple_credentials` to `true` in your config file or set the .env
+variable
 `GOOGLE_ALLOW_MULTIPLE_CREDENTIALS` to true if you're not using the config file.
 
 ### Allow encryption for json files
@@ -201,9 +205,12 @@ and after that you don't have to call it again.
 ## Pagination
 
 Use `$messages->hasNextPage()` to check whether next page is available.
-Use `$messages->next()` to get the next page results, which uses the same parameters (result per page, filters, etc.) when you loaded the first page.
-Use `$messages->getPageToken()` to get the unique identifier for the next page token. This is useful in creating a unique idendifier when storing the result in cache.
-Generally speaking, it is a bad practice to use API for pagination. It is slow and costly. Therefore, it is recommended to retrieve the cached result moving between pages and only flush the cache when have to.
+Use `$messages->next()` to get the next page results, which uses the same parameters (result per page, filters, etc.)
+when you loaded the first page.
+Use `$messages->getPageToken()` to get the unique identifier for the next page token. This is useful in creating a
+unique idendifier when storing the result in cache.
+Generally speaking, it is a bad practice to use API for pagination. It is slow and costly. Therefore, it is recommended
+to retrieve the cached result moving between pages and only flush the cache when have to.
 
 # Documentation
 
@@ -233,7 +240,8 @@ $mail = new Mail;
 
 For `to`, `from`, `cc` and `bcc`, you can set an array of emails and name or a string of email and name.
 
-`$mail->using( $token )` If you don't want to use the token file, you can use this function that sets the token to use in the request. It doesn't refresh
+`$mail->using( $token )` If you don't want to use the token file, you can use this function that sets the token to use
+in the request. It doesn't refresh
 
 `$mail->to( $to, $name = null )` sets the recipient email and name as optional
 
@@ -291,9 +299,11 @@ For `to`, `from`, `cc` and `bcc`, you can set an array of emails and name or a s
 
 `$mail->hasAttachments` Returns a boolean if the email has attachments
 
-`$mail->load` Load all the information of the email (labels, body, headers). You call this function on a single email. To load from the beginning see [preload()](#preload)
+`$mail->load` Load all the information of the email (labels, body, headers). You call this function on a single email.
+To load from the beginning see [preload()](#preload)
 
-`$mail->getHeader( $headerName, $regex = null )` Returns the header by name. Optionally, you can execute a regex on the value
+`$mail->getHeader( $headerName, $regex = null )` Returns the header by name. Optionally, you can execute a regex on the
+value
 
 # Labels
 
@@ -381,15 +391,18 @@ $attachment = new Attachment;
 
 `$attachment->getSize` Returns the size of the attachment in bytes
 
-`$attachment->getData` Get the all the information from the attachment. If you call `getAttachmentsWithData` you won't need this method.
+`$attachment->getData` Get the all the information from the attachment. If you call `getAttachmentsWithData` you won't
+need this method.
 
-`$attachment->saveAttachmentTo($path = null, $filename = null, $disk = 'local')` Saves the attachment on the storage folder. You can pass the path, name and disk to use.
+`$attachment->saveAttachmentTo($path = null, $filename = null, $disk = 'local')` Saves the attachment on the storage
+folder. You can pass the path, name and disk to use.
 
 ## Messages
 
 `LaravelGmail::message()->all( $pageToken = null )` Returns all the emails from the inbox
 
-`LaravelGmail::message()->take(2)->all( $pageToken = null )` The `take` method limits the emails coming from the query by the number set
+`LaravelGmail::message()->take(2)->all( $pageToken = null )` The `take` method limits the emails coming from the query
+by the number set
 
 `LaravelGmail::message()->get( $id )` Returns a single email with all the information
 
@@ -413,7 +426,8 @@ To get all unread emails: `LaravelGmail::message()->unread()->all()`
 
 `message()->raw($query)` for customized queries
 
-All the possible filters are in the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
+All the possible filters are in
+the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
 
 Of course you can use as a fluent api.
 
@@ -444,15 +458,18 @@ $attachment = new Attachment;
 
 `$attachment->getSize` Returns the size of the attachment in bytes
 
-`$attachment->getData` Get the all the information from the attachment. If you call `getAttachmentsWithData` you won't need this method.
+`$attachment->getData` Get the all the information from the attachment. If you call `getAttachmentsWithData` you won't
+need this method.
 
-`$attachment->saveAttachmentTo($path = null, $filename = null, $disk = 'local')` Saves the attachment on the storage folder. You can pass the path, name and disk to use.
+`$attachment->saveAttachmentTo($path = null, $filename = null, $disk = 'local')` Saves the attachment on the storage
+folder. You can pass the path, name and disk to use.
 
 ## Messages
 
 `LaravelGmail::message()->all( $pageToken = null )` Returns all the emails from the inbox
 
-`LaravelGmail::message()->take(2)->all( $pageToken = null )` The `take` method limits the emails coming from the query by the number set
+`LaravelGmail::message()->take(2)->all( $pageToken = null )` The `take` method limits the emails coming from the query
+by the number set
 
 `LaravelGmail::message()->get( $id )` Returns a single email with all the information
 
@@ -476,7 +493,8 @@ To get all unread emails: `LaravelGmail::message()->unread()->all()`
 
 `message()->raw($query)` for customized queries
 
-All the possible filters are in the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
+All the possible filters are in
+the [Filterable Trait](https://github.com/localtools/laravel-gmail/blob/master/src/Traits/Filterable.php)
 
 Of course you can use as a fluent api.
 
@@ -549,4 +567,5 @@ Example:
 
 #### Login Required
 
-If you're getting the `Login Required` error, try creating the `gmail-json.json` file under `/storage/app/gmail/tokens/`.
+If you're getting the `Login Required` error, try creating the `gmail-json.json` file
+under `/storage/app/gmail/tokens/`.
